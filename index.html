@@ -64,7 +64,7 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:1.4rem
 .vid-card:hover .vid-hover-video{opacity:1}
 .vid-card:hover .vid-poster{opacity:0}
 .vid-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.05) 55%,transparent 100%);opacity:0.7;transition:opacity 0.4s}
-.vid-card:hover .vid-overlay{opacity:1}
+.vid-card:hover .vid-overlay{opacity:1}.vid-card.no-video:hover .vid-overlay{opacity:0.45}
 .vid-hover-indicator{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.7);opacity:0;transition:opacity 0.35s,transform 0.35s;z-index:5;pointer-events:none}
 .vid-hover-indicator span{width:58px;height:58px;border:2px solid rgba(254,255,196,0.85);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#FEFFC4}
 .vid-card:hover .vid-hover-indicator{opacity:1;transform:translate(-50%,-50%) scale(1)}
@@ -193,14 +193,14 @@ footer{padding:1.6rem var(--pad);border-top:1px solid var(--border);display:flex
 
   <!-- Row 2: Film Bus (left) + Red Sea (right) -->
   <div class="video-grid" style="margin-top:10px">
-    <div class="vid-card horiz" onclick="openWork('filmbus')">
+    <div class="vid-card horiz no-video" onclick="openWork('filmbus')">
       <div class="vid-wrap">
         <div class="vid-poster" style="background-image:url('https://imagedelivery.net/ysWsYHLrPvaM0MFusMipNw/93c7b67b-80df-48cf-285b-ce083a8b1c00/public')"></div>
       </div>
       <div class="vid-overlay"></div><div class="vid-hover-indicator"><span>↗</span></div><div class="vid-slide-bar"></div>
       <div class="vid-info"><div><div class="vid-cat">Festival Production</div><div class="vid-name">The Film Bus</div><div class="vid-year">TISFF · 2025</div></div></div>
     </div>
-    <div class="vid-card horiz" onclick="openWork('redsea')">
+    <div class="vid-card horiz no-video" onclick="openWork('redsea')">
       <div class="vid-wrap">
         <div class="vid-poster" style="background-image:url('https://imagedelivery.net/ysWsYHLrPvaM0MFusMipNw/c5de1484-c499-44d0-f719-f12fcf22e600/public')"></div>
       </div>
@@ -213,7 +213,7 @@ footer{padding:1.6rem var(--pad);border-top:1px solid var(--border);display:flex
   <div class="vid-row3" style="margin-top:10px">
     <div class="vid-card vert" onclick="openWork('step')">
       <div class="vid-wrap">
-        <div class="vid-poster" style="background-image:url('https://videodelivery.net/12ac931dde5405354cf5e20eb529861f/thumbnails/thumbnail.jpg?time=5s&height=800')"></div>
+        <div class="vid-poster" style="background-image:url('https://imagedelivery.net/ysWsYHLrPvaM0MFusMipNw/c3dfe727-06a9-4b5e-319b-9e73a1013f00/public')"></div>
         <video class="vid-hover-video" id="hv-step" loop muted playsinline preload="none"></video>
       </div>
       <div class="vid-overlay"></div><div class="vid-hover-indicator"><span>↗</span></div><div class="vid-slide-bar"></div>
@@ -221,11 +221,11 @@ footer{padding:1.6rem var(--pad);border-top:1px solid var(--border);display:flex
     </div>
     <div class="vid-card vert" onclick="openWork('gdud')">
       <div class="vid-wrap">
-        <div class="vid-poster" style="background-image:url('https://videodelivery.net/cc5aad2022c4ef686c9a752f083ac909/thumbnails/thumbnail.jpg?time=0s&height=800')"></div>
+        <div class="vid-poster" style="background-image:url('https://imagedelivery.net/ysWsYHLrPvaM0MFusMipNw/7aae1db1-ba72-4e3b-5b02-f1e06ca53d00/public')"></div>
         <video class="vid-hover-video" id="hv-gdud" loop muted playsinline preload="none"></video>
       </div>
       <div class="vid-overlay"></div><div class="vid-hover-indicator"><span>↗</span></div><div class="vid-slide-bar"></div>
-      <div class="vid-info"><div><div class="vid-cat">Military · Documentary</div><div class="vid-name">Born in War</div><div class="vid-year">Gdud Tzuri · 2026</div></div></div>
+      <div class="vid-info"><div><div class="vid-cat">Military · Promo Video</div><div class="vid-name">Born in War</div><div class="vid-year">Gdud Tzuri · 2026</div></div></div>
     </div>
   </div>
 </section>
@@ -411,7 +411,7 @@ const works={
     title:'It Starts with a Step',cat:'Brand Film',year:'2026',role:'Line Producer',
     vertical:true,
     tagline:'A short brand film for a non-profit devoted to encouraging young adults to relocate to Israel\'s Gaza Envelope and Northern border regions.',
-    poster:'https://videodelivery.net/12ac931dde5405354cf5e20eb529861f/thumbnails/thumbnail.jpg?time=5s&height=800',
+    poster:'https://imagedelivery.net/ysWsYHLrPvaM0MFusMipNw/c3dfe727-06a9-4b5e-319b-9e73a1013f00/public',
     cfId:'12ac931dde5405354cf5e20eb529861f',
     stages:[
       {num:'01',label:'Concept',heading:'Concept Development',text:'Collaborated on shaping the creative direction and narrative concept for the film alongside the writing team.'},
@@ -422,10 +422,10 @@ const works={
     ]
   },
   gdud:{
-    title:'Born in War',cat:'Military · Documentary',year:'2026',role:'Editor & Creative Director',
+    title:'Born in War',cat:'Military · Promo Video',year:'2026',role:'Editor & Creative Director',
     vertical:true,
     tagline:'A tribute film for Gdud Tzuri — born during Operation Roaring Lion. Shot collectively by soldiers across training and operations, edited and shaped into a single vision.',
-    poster:'https://videodelivery.net/cc5aad2022c4ef686c9a752f083ac909/thumbnails/thumbnail.jpg?time=0s&height=800',
+    poster:'https://imagedelivery.net/ysWsYHLrPvaM0MFusMipNw/7aae1db1-ba72-4e3b-5b02-f1e06ca53d00/public',
     cfId:'cc5aad2022c4ef686c9a752f083ac909',
     stages:[
       {num:'01',label:'Concept',heading:'Creative Direction',text:'Conceived and directed the film\'s creative vision — establishing the narrative arc, tone, and visual language for the unit\'s identity film.'},
