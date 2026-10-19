@@ -41,8 +41,15 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:1.4rem
 .nav-links a{color:var(--muted);text-decoration:none;font-size:0.67rem;letter-spacing:1.5px;text-transform:uppercase;transition:color 0.2s;cursor:none;font-family:'Manrope',sans-serif;font-weight:600}
 .nav-links a:hover{color:var(--ink)}
 
+/* ── SHOWREEL BANNER ── */
+.showreel-banner{width:100%;aspect-ratio:16/7;background:#000;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.showreel-banner iframe{position:absolute;inset:0;width:100%;height:100%;border:none;pointer-events:none}
+.showreel-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.8rem;background:#0a0a0a}
+.showreel-placeholder-icon{width:56px;height:56px;border:1.5px solid rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:rgba(255,255,255,0.3)}
+.showreel-placeholder-txt{font-family:'Manrope',sans-serif;font-size:0.58rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.2);font-weight:600}
+
 /* ── HERO ── */
-.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:3rem var(--pad) 4rem;border-bottom:1px solid var(--border);position:relative}
+.hero{display:flex;flex-direction:column;justify-content:center;padding:3.5rem var(--pad) 4rem;border-bottom:1px solid var(--border);position:relative}
 .hero-tag{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;font-family:'Manrope',sans-serif;font-weight:600;opacity:0;transform:translateY(14px);transition:opacity 0.7s 0.1s,transform 0.7s 0.1s}
 .hero-title{font-family:'Manrope',sans-serif;font-size:clamp(4rem,8vw,7.5rem);font-weight:430;line-height:0.95;letter-spacing:-2px;color:var(--ink);opacity:0;transform:translateY(20px);transition:opacity 0.7s 0.25s,transform 0.7s 0.25s}
 .hero-title .accent{color:var(--accent)}
@@ -195,6 +202,16 @@ footer{padding:1.6rem var(--pad);border-top:1px solid var(--border);display:flex
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
+
+<!-- SHOWREEL BANNER -->
+<div class="showreel-banner">
+  <!-- להחליף את ה-placeholder ב: -->
+  <!-- <iframe src="https://customer-XXXX.cloudflarestream.com/VIDEO_ID/iframe?autoplay=true&loop=true&muted=true&controls=false&poster=URL" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"></iframe> -->
+  <div class="showreel-placeholder">
+    <div class="showreel-placeholder-icon">▶</div>
+    <div class="showreel-placeholder-txt">Showreel — Coming Soon</div>
+  </div>
+</div>
 
 <section class="hero" id="heroSection">
   <p class="hero-tag">Film Producer · Creative Director</p>
