@@ -42,9 +42,14 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:1.4rem
 .nav-links a:hover{color:var(--ink)}
 
 /* ── SHOWREEL BANNER ── */
-.showreel-banner{width:100%;aspect-ratio:16/7;background:#000;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
-.showreel-banner iframe{position:absolute;inset:0;width:100%;height:100%;border:none;pointer-events:none}
-.showreel-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.8rem;background:#0a0a0a}
+.showreel-banner{width:100%;aspect-ratio:16/7;background:#111;position:relative;overflow:hidden;border-bottom:1px solid var(--border);border-radius:12px;margin:0 var(--pad);width:calc(100% - var(--pad)*2)}
+.showreel-banner video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:12px}
+.showreel-banner:hover ~ * #cursor,
+.showreel-banner:hover ~ #cursor{background:#fff!important}
+/* white cursor on showreel */
+.showreel-banner{cursor:none}
+.showreel-banner:hover ~ #cursor-ring{border-color:#fff!important}
+.showreel-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.8rem;background:#111;border-radius:12px}
 .showreel-placeholder-icon{width:56px;height:56px;border:1.5px solid rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:rgba(255,255,255,0.3)}
 .showreel-placeholder-txt{font-family:'Manrope',sans-serif;font-size:0.58rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.2);font-weight:600}
 
@@ -204,10 +209,15 @@ footer{padding:1.6rem var(--pad);border-top:1px solid var(--border);display:flex
 </nav>
 
 <!-- SHOWREEL BANNER -->
-<div class="showreel-banner">
-  <!-- להחליף את ה-placeholder ב: -->
-  <!-- <iframe src="https://customer-XXXX.cloudflarestream.com/VIDEO_ID/iframe?autoplay=true&loop=true&muted=true&controls=false&poster=URL" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"></iframe> -->
-  <div class="showreel-placeholder">
+<div class="showreel-banner" id="showreelBanner">
+  <!-- כשיש video ID מ-Cloudflare, להחליף את ה-<video> ב: -->
+  <!-- <stream src="VIDEO_ID" autoplay loop muted playsinline controls="false" style="position:absolute;inset:0;width:100%;height:100%;border-radius:12px"></stream> -->
+  <!-- <script data-cfasync="false" defer type="text/javascript" src="https://embed.cloudflarestream.com/embed/sdk.latest.js"></script> -->
+  <video id="showreelVideo" autoplay loop muted playsinline disablePictureInPicture controlslist="nodownload nofullscreen noremoteplayback" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:12px">
+    <!-- להחליף ב-src של Cloudflare Stream HLS כשמוכן: -->
+    <!-- <source src="https://customer-XXXX.cloudflarestream.com/VIDEO_ID/manifest/video.m3u8" type="application/x-mpegURL"> -->
+  </video>
+  <div class="showreel-placeholder" id="showreelPlaceholder">
     <div class="showreel-placeholder-icon">▶</div>
     <div class="showreel-placeholder-txt">Showreel — Coming Soon</div>
   </div>
@@ -382,6 +392,16 @@ document.querySelectorAll('a,button,.vid-card,.skill').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
 });
+/* white cursor on showreel */
+const showreelBanner=document.getElementById('showreelBanner');
+if(showreelBanner){
+  showreelBanner.addEventListener('mouseenter',()=>{
+    cur.style.background='#fff';ring.style.borderColor='#fff';
+  });
+  showreelBanner.addEventListener('mouseleave',()=>{
+    cur.style.background='#000';ring.style.borderColor='#000';
+  });
+}
 
 /* ── HERO ── */
 setTimeout(()=>document.getElementById('heroSection').classList.add('visible'),80);
