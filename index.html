@@ -42,14 +42,14 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:1.4rem
 .nav-links a:hover{color:var(--ink)}
 
 /* ── SHOWREEL BANNER ── */
-.showreel-banner{width:100%;aspect-ratio:16/7;background:#111;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.showreel-banner{margin:0 12px;width:calc(100% - 24px);aspect-ratio:16/7;background:#111;position:relative;overflow:hidden;border-radius:12px}
 .showreel-banner video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .showreel-banner:hover ~ * #cursor,
 .showreel-banner:hover ~ #cursor{background:#fff!important}
 /* white cursor on showreel */
 .showreel-banner{cursor:none}
 .showreel-banner:hover ~ #cursor-ring{border-color:#fff!important}
-.showreel-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.8rem;background:#111}
+.showreel-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.8rem;background:#111;border-radius:12px}
 .showreel-placeholder-icon{width:56px;height:56px;border:1.5px solid rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:rgba(255,255,255,0.3)}
 .showreel-placeholder-txt{font-family:'Manrope',sans-serif;font-size:0.58rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.2);font-weight:600}
 
