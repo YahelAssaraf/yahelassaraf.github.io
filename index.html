@@ -34,15 +34,19 @@ body.hovering #cursor{transform:translate(-50%,-50%) scale(2.2)}
 body.hovering #cursor-ring{width:52px;height:52px;opacity:0.15}
 
 /* ── NAV ── */
-nav{display:flex;justify-content:space-between;align-items:center;padding:1.4rem var(--pad);border-bottom:1px solid var(--border);background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100}
-.nav-name{font-family:'Manrope',sans-serif;font-size:0.78rem;font-weight:430;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);cursor:none;transition:color 0.2s}
-.nav-name:hover{color:var(--accent)}
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.4rem var(--pad);border-bottom:none;background:transparent;position:fixed;top:0;left:0;right:0;z-index:100;transition:background 0.4s,border-color 0.4s}
+nav.scrolled{background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-name{font-family:'Manrope',sans-serif;font-size:0.78rem;font-weight:430;letter-spacing:2.5px;text-transform:uppercase;color:#fff;cursor:none;transition:color 0.4s}
+nav.scrolled .nav-name{color:var(--ink)}
+.nav-name:hover{opacity:0.7}
 .nav-links{display:flex;gap:2.5rem;list-style:none}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:0.67rem;letter-spacing:1.5px;text-transform:uppercase;transition:color 0.2s;cursor:none;font-family:'Manrope',sans-serif;font-weight:600}
-.nav-links a:hover{color:var(--ink)}
+.nav-links a{color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.67rem;letter-spacing:1.5px;text-transform:uppercase;transition:color 0.4s;cursor:none;font-family:'Manrope',sans-serif;font-weight:600}
+nav.scrolled .nav-links a{color:var(--muted)}
+.nav-links a:hover{color:#fff}
+nav.scrolled .nav-links a:hover{color:var(--ink)}
 
 /* ── SHOWREEL BANNER ── */
-.showreel-banner{margin:0 12px;width:calc(100% - 24px);aspect-ratio:16/7;background:#111;position:relative;overflow:hidden;border-radius:12px}
+.showreel-banner{margin:0 12px;width:calc(100% - 24px);aspect-ratio:16/7;background:#111;position:relative;overflow:hidden;border-radius:0 0 12px 12px;margin-top:-1px}
 .showreel-banner video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .showreel-banner:hover ~ * #cursor,
 .showreel-banner:hover ~ #cursor{background:#fff!important}
@@ -402,6 +406,16 @@ if(showreelBanner){
     cur.style.background='#000';ring.style.borderColor='#000';
   });
 }
+
+/* ── NAV SCROLL ── */
+const navEl=document.querySelector('nav');
+const showreelH=document.getElementById('showreelBanner');
+function updateNav(){
+  const threshold=showreelH?showreelH.offsetHeight-10:80;
+  navEl.classList.toggle('scrolled',window.scrollY>threshold);
+}
+window.addEventListener('scroll',updateNav,{passive:true});
+updateNav();
 
 /* ── HERO ── */
 setTimeout(()=>document.getElementById('heroSection').classList.add('visible'),80);
