@@ -645,8 +645,18 @@ function toggleWorkPlay(){
   else{v.pause();document.getElementById('iconPause').style.display='none';document.getElementById('iconPlay').style.display='';}
 }
 
+/* ── MOBILE BACK-BUTTON SUPPORT ── */
+const isMobile=()=>window.innerWidth<=768;
+window.addEventListener('popstate',()=>{
+  if(document.getElementById('workOverlay').classList.contains('open')){
+    _closeWorkInternal();
+  }
+});
+
 /* ── OPEN / CLOSE OVERLAY ── */
 function openWork(key){
+  if(isMobile()) history.pushState({work:key},'','');
+
   const w=works[key];
   const overlay=document.getElementById('workOverlay');
   const vidInner=document.getElementById('modalVidInner');
@@ -704,10 +714,14 @@ function openWork(key){
   overlay.scrollTo({top:0,behavior:'instant'});
 }
 
-function closeWork(){
+function _closeWorkInternal(){
   document.getElementById('workOverlay').classList.remove('open');
   document.body.style.overflow='';
   stopWorkVideo();
+}
+function closeWork(){
+  if(isMobile()&&history.state&&history.state.work) history.back();
+  else _closeWorkInternal();
 }
 
 // close on backdrop click
