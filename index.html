@@ -409,8 +409,14 @@ footer{padding:1.6rem var(--pad);border-top:1px solid var(--border);display:flex
       <div class="modal-vid-inner" id="modalVidInner">
         <video id="workVideo" autoplay loop muted playsinline></video>
         <div class="modal-vid-btns">
-          <button class="modal-vid-btn" id="workPlayBtn" onclick="toggleWorkPlay()">⏸</button>
-          <button class="modal-vid-btn" id="workSoundBtn" onclick="toggleWorkSound()">♪</button>
+          <button class="modal-vid-btn" id="workPlayBtn" onclick="toggleWorkPlay()" aria-label="Play/Pause">
+            <svg id="iconPause" width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="2" y="1" width="4" height="12" rx="1"/><rect x="8" y="1" width="4" height="12" rx="1"/></svg>
+            <svg id="iconPlay" width="14" height="14" viewBox="0 0 14 14" fill="currentColor" style="display:none"><polygon points="2,1 13,7 2,13"/></svg>
+          </button>
+          <button class="modal-vid-btn" id="workSoundBtn" onclick="toggleWorkSound()" aria-label="Sound">
+            <svg id="iconMute" width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M2 4.5h2.5L8 1.5v11L4.5 9.5H2a.5.5 0 01-.5-.5v-4A.5.5 0 012 4.5z"/><line x1="10" y1="4" x2="13" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="4" x2="10" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg id="iconSound" width="14" height="14" viewBox="0 0 14 14" fill="currentColor" style="display:none"><path d="M2 4.5h2.5L8 1.5v11L4.5 9.5H2a.5.5 0 01-.5-.5v-4A.5.5 0 012 4.5z"/><path d="M10 4.5a3.5 3.5 0 010 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          </button>
         </div>
       </div>
     </div>
@@ -625,11 +631,19 @@ function stopWorkVideo(){
   const wv=document.getElementById('workVideo');
   wv.pause();wv.muted=true;wv.src='';
   if(currentHls){currentHls.destroy();currentHls=null;}
-  document.getElementById('workSoundBtn').textContent='♪';
-  document.getElementById('workSoundBtn').style.background='';
+  document.getElementById('iconMute').style.display='';document.getElementById('iconSound').style.display='none';
 }
-function toggleWorkSound(){const v=document.getElementById('workVideo'),b=document.getElementById('workSoundBtn');v.muted=!v.muted;b.textContent=v.muted?'♪':'♬';b.style.background=v.muted?'':'rgba(125,211,252,0.5)'}
-function toggleWorkPlay(){const v=document.getElementById('workVideo'),b=document.getElementById('workPlayBtn');if(v.paused){v.play();b.textContent='⏸'}else{v.pause();b.textContent='▶'}}
+function toggleWorkSound(){
+  const v=document.getElementById('workVideo');
+  v.muted=!v.muted;
+  document.getElementById('iconMute').style.display=v.muted?'':'none';
+  document.getElementById('iconSound').style.display=v.muted?'none':'';
+}
+function toggleWorkPlay(){
+  const v=document.getElementById('workVideo');
+  if(v.paused){v.play();document.getElementById('iconPause').style.display='';document.getElementById('iconPlay').style.display='none';}
+  else{v.pause();document.getElementById('iconPause').style.display='none';document.getElementById('iconPlay').style.display='';}
+}
 
 /* ── OPEN / CLOSE OVERLAY ── */
 function openWork(key){
@@ -669,7 +683,7 @@ function openWork(key){
   } else {
     vidInner.style.display='block';
     wv.poster=w.poster||'';wv.muted=true;
-    document.getElementById('workPlayBtn').textContent='⏸';
+    document.getElementById('iconPause').style.display='';document.getElementById('iconPlay').style.display='none';
     if(w.cfId){
       const src=`https://videodelivery.net/${w.cfId}/manifest/video.m3u8`;
       if(Hls.isSupported()){const hls=new Hls();currentHls=hls;hls.loadSource(src);hls.attachMedia(wv);wv.play().catch(()=>{})}
